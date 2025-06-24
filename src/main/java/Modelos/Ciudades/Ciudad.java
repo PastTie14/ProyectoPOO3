@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelos.Ciudades;
+import Modelos.Ciudades.Estaciones.Estacion;
+import Modelos.Ciudades.Estaciones.EstacionCargaFactory;
+import Modelos.Ciudades.Estaciones.EstacionCombustibleFactory;
+import Modelos.Ciudades.Estaciones.EstacionFactory;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
@@ -322,6 +326,7 @@ public class Ciudad implements Serializable {
     public void agregarEstacion(Estacion newSC) {
         estaciones.add(newSC);
     }
+    
 
     /**
      * Elimina una estación de la ciudad según su nombre y tipo.

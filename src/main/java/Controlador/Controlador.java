@@ -9,9 +9,12 @@ import Modelo.Vehiculos.VehiculoCombustible;
 import Modelos.Ciudades.AdmCiudad;
 import Modelos.Ciudades.Ciudad;
 import Modelos.Ciudades.Conexion;
-import Modelos.Ciudades.Estacion;
-import Modelos.Ciudades.EstacionCarga;
-import Modelos.Ciudades.EstacionCombustible;
+import Modelos.Ciudades.Estaciones.Estacion;
+import Modelos.Ciudades.Estaciones.EstacionCarga;
+import Modelos.Ciudades.Estaciones.EstacionCargaFactory;
+import Modelos.Ciudades.Estaciones.EstacionCombustible;
+import Modelos.Ciudades.Estaciones.EstacionCombustibleFactory;
+import Modelos.Ciudades.Estaciones.EstacionFactory;
 import Modelos.Clientes.*;
 import Modelos.CombustiblesCargadores.AdmTipos;
 import Modelos.CombustiblesCargadores.Cargador;
@@ -244,18 +247,22 @@ public final class Controlador {
      */
     public boolean guardarEstacion(String nombre, String tipo, Object[] tipos) {
         Ciudad city = getCiudadSeleccionada();
-        Estacion temp;
-        if (city.validarEstacion(nombre, tipo)) {
-            if ("Combustibles".equalsIgnoreCase(tipo)) {
-                temp = new EstacionCombustible(nombre);
-            } else {
-                temp = new EstacionCarga(nombre);
-            }
-            city.agregarEstacion(temp);
-            adminCiudades.guardarDatosModificados();
-            return true;
+        if (!city.validarEstacion(nombre, tipo)) return false;
+
+        EstacionFactory factory;
+
+        if ("Combustibles".equalsIgnoreCase(tipo)) {
+            factory = new EstacionCombustibleFactory();
+        } else if ("Cargadores".equalsIgnoreCase(tipo)) {
+            factory = new EstacionCargaFactory();
+        } else {
+            return false;
         }
-        return false;
+
+        Estacion temp = factory.crearEstacion(nombre);
+        temp.setSuministros(tipos);
+        city.agregarEstacion(temp);
+        return adminCiudades.guardarDatosModificados();
     }
 
     /**

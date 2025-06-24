@@ -2,6 +2,7 @@ com.mycompany.proyectopoo3
 Controlador
 Modelo.Vehiculos
 Modelos.Ciudades
+Modelos.Ciudades.Estaciones
 Modelos.Clientes
 Modelos.CombustiblesCargadores
 Utilidades

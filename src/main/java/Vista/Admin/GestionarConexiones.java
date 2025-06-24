@@ -8,7 +8,7 @@ import Controlador.Controlador;
 import Modelo.Vehiculos.Vehiculo;
 import Modelos.Ciudades.Ciudad;
 import Modelos.Ciudades.Conexion;
-import Modelos.Ciudades.Estacion;
+import Modelos.Ciudades.Estaciones.Estacion;
 import Modelos.Clientes.Usuario;
 import Modelos.CombustiblesCargadores.Combustible;
 import Modelos.CombustiblesCargadores.Tipos;
