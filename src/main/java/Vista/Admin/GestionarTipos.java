@@ -53,6 +53,9 @@ public class GestionarTipos extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public GestionarTipos() {
         
         controlador = Controlador.getInstance();
@@ -99,6 +102,9 @@ public class GestionarTipos extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelLista(){
         panelLista = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -119,8 +125,9 @@ public class GestionarTipos extends JFrame{
         
     }
     
-   
-    
+    /**
+     *
+     */
     public void generarPanelInfo() {
         panelInfo = CreadorComponentesVista.generarPanelBlanco();
 
@@ -171,14 +178,18 @@ public class GestionarTipos extends JFrame{
         panelPrincipal.add(panelInfo);
     }
     
-    
-    
+    /**
+     *
+     * @return
+     */
     public boolean validarEspacios(){
         boolean vacios = !nombre.getText().isBlank();
         return vacios;
     }
     
-    
+    /**
+     *
+     */
     public void changeSwitch(){
         if (tipos.isEncendido()) {
             updatePanelLista(controlador.getCargadores().toArray());
@@ -186,14 +197,20 @@ public class GestionarTipos extends JFrame{
             updatePanelLista(controlador.getCombustibles().toArray());
         }
     }
+
+    /**
+     *
+     * @param array
+     */
     public void updatePanelLista(Object[] array){
         panelLista.eliminarTodasLasTarjetas();
         panelLista.agregarTarjetas(array);
         
     }
     
-    
-    
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         panelOpciones = CreadorComponentesVista.generarPanelBlanco();
         int anchoPanelOpciones = (panelPrincipal.getWidth() / 3 - 40) * 2;
@@ -257,7 +274,10 @@ public class GestionarTipos extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(GestionarTipos::new);
     }
