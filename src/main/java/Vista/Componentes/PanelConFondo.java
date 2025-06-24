@@ -20,7 +20,11 @@ public class PanelConFondo extends JPanel {
         private final int screenWidth;
         private final int screenHeight;
         
-        public PanelConFondo(String pathImagen) {
+    /**
+     *
+     * @param pathImagen
+     */
+    public PanelConFondo(String pathImagen) {
             fondo = UtilidadesVisuales.obtenerImagenDeRecursos(pathImagen).getImage();
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
             screenWidth = screenSize.width;
@@ -28,7 +32,11 @@ public class PanelConFondo extends JPanel {
             setLayout(null);
         }
         
-        @Override
+    /**
+     *
+     * @param g
+     */
+    @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage(fondo, 0, 0, screenWidth, screenHeight, this);

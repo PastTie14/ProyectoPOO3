@@ -13,13 +13,21 @@ import javax.swing.ImageIcon;
  */
 public class UtilidadesVisuales {
     
-    
+    /**
+     *
+     * @param nombreImagen
+     * @return
+     */
     public static String obtenerRutaImagenDeRecursos(String nombreImagen){
         String carpetaBase = System.getProperty("user.dir");
         return carpetaBase + "\\Recursos\\" + nombreImagen;
     }
     
-    
+    /**
+     *
+     * @param nombreImagen
+     * @return
+     */
     public static ImageIcon obtenerImagenDeRecursos(String nombreImagen){
         ImageIcon imagen = new ImageIcon("Recursos\\" + nombreImagen);
         return imagen;

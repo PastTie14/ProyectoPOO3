@@ -14,11 +14,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ *
+ * @author Ian
+ */
 public class BotonRedondeado extends JButton {
     private Color colorBase = new Color(230, 230, 230);
     private Color colorHover = new Color(200, 200, 200);
     private boolean hovering = false;
 
+    /**
+     *
+     * @param texto
+     * @param icono
+     */
     public BotonRedondeado(String texto, Icon icono) {
         super(texto, icono);
         setFont(new Font("Arial", Font.PLAIN, 16));
@@ -51,6 +60,10 @@ public class BotonRedondeado extends JButton {
         });
     }
     
+    /**
+     *
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -94,7 +107,11 @@ public class BotonRedondeado extends JButton {
         g2.dispose();
     }
     
-   @Override
+    /**
+     *
+     * @param g
+     */
+    @Override
     protected void paintBorder(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);

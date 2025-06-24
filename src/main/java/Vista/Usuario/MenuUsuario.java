@@ -50,6 +50,9 @@ public class MenuUsuario extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public MenuUsuario() {
         
         controlador = Controlador.getInstance();
@@ -94,6 +97,9 @@ public class MenuUsuario extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelLista(){
         panelLista = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -111,6 +117,9 @@ public class MenuUsuario extends JFrame{
         
     }
     
+    /**
+     *
+     */
     public void generarPanelInfo() {
         panelInfo = CreadorComponentesVista.generarPanelBlanco();
 
@@ -149,6 +158,9 @@ public class MenuUsuario extends JFrame{
         panelPrincipal.add(panelInfo);
     }
     
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         panelOpciones = CreadorComponentesVista.generarPanelBlanco();
         int anchoPanelOpciones = (panelPrincipal.getWidth() / 3 - 40) * 2;
@@ -183,7 +195,10 @@ public class MenuUsuario extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MenuUsuario::new);
     }

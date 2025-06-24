@@ -51,6 +51,9 @@ public class GestionarCiudades extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public GestionarCiudades() {
         
         controlador = Controlador.getInstance();
@@ -97,6 +100,9 @@ public class GestionarCiudades extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelLista(){
         panelLista = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -118,8 +124,9 @@ public class GestionarCiudades extends JFrame{
 
     }
     
-   
-    
+    /**
+     *
+     */
     public void generarPanelInfo() {
         panelInfo = CreadorComponentesVista.generarPanelBlanco();
 
@@ -169,22 +176,28 @@ public class GestionarCiudades extends JFrame{
         panelPrincipal.add(panelInfo);
     }
     
-    
-    
+    /**
+     *
+     * @return
+     */
     public boolean validarEspacios(){
         boolean vacios = !longitud.getText().isEmpty() || nombre.getText().isEmpty() || latitud.getText().isEmpty();
         boolean numeros = longitud.getText().matches("(\\-?\\d*\\.?\\d+)") && latitud.getText().matches("(\\-?\\d*\\.?\\d+)");
         return vacios && numeros;
     }
     
-    
-    
+    /**
+     *
+     */
     public void updatePanelLista(){
         panelLista.eliminarTodasLasTarjetas();
         panelLista.agregarTarjetas(controlador.getCiudades().toArray());
         
     }
     
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         panelOpciones = CreadorComponentesVista.generarPanelBlanco();
         int anchoPanelOpciones = (panelPrincipal.getWidth() / 3 - 40) * 2;
@@ -246,7 +259,10 @@ public class GestionarCiudades extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(GestionarCiudades::new);
     }

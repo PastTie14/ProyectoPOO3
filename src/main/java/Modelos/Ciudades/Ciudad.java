@@ -27,12 +27,23 @@ public class Ciudad implements Serializable {
     private double latitudY;
 
     // Constructor
+
+    /**
+     *
+     * @param nombre
+     */
     public Ciudad(String nombre) {
         this.nombre = nombre;
         this.estaciones = new ArrayList<>();
         this.conexiones = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param nombre
+     * @param longitudX
+     * @param latitudY
+     */
     public Ciudad(String nombre, double longitudX, double latitudY) {
         this.nombre = nombre;
         this.longitudX = longitudX;
@@ -41,22 +52,58 @@ public class Ciudad implements Serializable {
         this.conexiones = new ArrayList<>();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() { return nombre; }
 
+    /**
+     *
+     * @return
+     */
     public List<Estacion> getEstaciones() { return estaciones; }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) { this.nombre = nombre; }
 
+    /**
+     *
+     * @param estaciones
+     */
     public void setEstaciones(ArrayList<Estacion> estaciones) { this.estaciones = estaciones; }
 
+    /**
+     *
+     * @return
+     */
     public double getLongitudX() { return longitudX; }
 
+    /**
+     *
+     * @param longitudX
+     */
     public void setLongitudX(double longitudX) { this.longitudX = longitudX; }
 
+    /**
+     *
+     * @return
+     */
     public double getLatitudY() { return latitudY; }
 
+    /**
+     *
+     * @param latitudY
+     */
     public void setLatitudY(double latitudY) { this.latitudY = latitudY; }
 
+    /**
+     *
+     * @return
+     */
     public String getConexionesAsString() {
         String str = "";
         for (Conexion conexion : conexiones) {
@@ -65,6 +112,10 @@ public class Ciudad implements Serializable {
         return str;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEstacionesAsString() {
         String str = "";
         for (Estacion estacion : estaciones) {
@@ -101,6 +152,10 @@ public class Ciudad implements Serializable {
              + "</html>";
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "<html>"
@@ -127,6 +182,10 @@ public class Ciudad implements Serializable {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Conexion> getConexiones() {
         return conexiones;
     }
@@ -276,6 +335,11 @@ public class Ciudad implements Serializable {
                                      && e.getTipoEstacion().equalsIgnoreCase(tipo));
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -284,6 +348,10 @@ public class Ciudad implements Serializable {
         return nombre.equals(ciudad.nombre);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         return nombre.hashCode();

@@ -70,6 +70,10 @@ public final class Controlador {
             ((Usuario) clienteSeleccionado).setVehiculoSeleccionado(vehiculo);
     }
 
+    /**
+     *
+     * @return
+     */
     public Vehiculo getVehiculoSeleccionado() {
         if (clienteSeleccionado instanceof Usuario)
             return ((Usuario) clienteSeleccionado).getVehiculoSeleccionado();
@@ -165,14 +169,27 @@ public final class Controlador {
 
     //----------------Funcionalidades de un Admin----------------------------
 
+    /**
+     *
+     * @return
+     */
+
     public List<Ciudad> getCiudades() {
         return adminCiudades.getCiudades();
     }
 
+    /**
+     *
+     * @return
+     */
     public Ciudad getCiudadSeleccionada() {
         return adminCiudades.getCiudadSeleccionada();
     }
 
+    /**
+     *
+     * @param ciudadSeleccionada
+     */
     public void setCiudadSeleccionada(Ciudad ciudadSeleccionada) {
         adminCiudades.setCiudadSeleccionada(ciudadSeleccionada);
     }
@@ -428,18 +445,35 @@ public final class Controlador {
         return adminClientes.guardarNuevoAdmin(nombre, contrasenna);
     }
 
+    /**
+     *
+     * @return
+     */
     public Cliente getClienteSeleccionado() {
         return clienteSeleccionado;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Cargador> getCargadores() {
         return adminTipos.getCargadores();
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Combustible> getCombustibles() {
         return adminTipos.getCombustibles();
     }
 
+    /**
+     *
+     * @param combustible
+     * @return
+     */
     public Combustible getCombustibleDeString(String combustible) {
         return adminTipos.getCombustibleDeString(combustible);
     }

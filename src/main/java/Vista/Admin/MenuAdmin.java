@@ -44,6 +44,9 @@ public class MenuAdmin extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public MenuAdmin() {
         
         controlador = Controlador.getInstance();
@@ -88,6 +91,9 @@ public class MenuAdmin extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelLista(){
         panelLista = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -104,6 +110,9 @@ public class MenuAdmin extends JFrame{
         
     }
     
+    /**
+     *
+     */
     public void generarPanelInfo() {
         panelInfo = CreadorComponentesVista.generarPanelBlanco();
 
@@ -137,6 +146,9 @@ public class MenuAdmin extends JFrame{
         panelPrincipal.add(panelInfo);
     }
     
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         panelOpciones = CreadorComponentesVista.generarPanelBlanco();
         int anchoPanelOpciones = (panelPrincipal.getWidth() / 3 - 40) * 2;
@@ -190,7 +202,10 @@ public class MenuAdmin extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(MenuAdmin::new);
     }

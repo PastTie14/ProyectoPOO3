@@ -33,6 +33,9 @@ public class Ingresar extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public Ingresar() {
         
         controlador = Controlador.getInstance();
@@ -118,10 +121,18 @@ public class Ingresar extends JFrame{
         
     }
     
+    /**
+     *
+     * @param text
+     */
     public void setUserText(String text){
         usuarioInput.setText(text);
     }
     
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Ingresar::new);
     }

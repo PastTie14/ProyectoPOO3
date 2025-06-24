@@ -35,7 +35,9 @@ public class PanelTarjetas extends JScrollPane {
     private JButton tarjetaSeleccionada = null;
     private Object objetoSeleccionado = null;
     
-
+    /**
+     *
+     */
     public PanelTarjetas() {
         objetos = new ArrayList<>();
         contenedor = new JPanel();
@@ -47,19 +49,35 @@ public class PanelTarjetas extends JScrollPane {
         getVerticalScrollBar().setUnitIncrement(16); // para hacer scroll más fluido
     }
 
+    /**
+     *
+     * @param listener
+     */
     public void setOnSeleccionarTarjeta(Consumer<Object> listener) {
         this.listener = listener;
     }
     
+    /**
+     *
+     * @param objetos
+     */
     public void agregarTarjetas(Object[] objetos){
         for (Object objeto : objetos) {
             agregarTarjeta(objeto);
         }
     }
+
+    /**
+     *
+     * @param icono
+     */
     public void setIconoSelected(Icon icono) {
         this.iconoSelected = icono;
     }
     
+    /**
+     *
+     */
     public void eliminarTodasLasTarjetas() {
         objetos.clear();
         contenedor.removeAll();              
@@ -69,9 +87,10 @@ public class PanelTarjetas extends JScrollPane {
         contenedor.repaint();                 
     }
     
-    
-    
-
+    /**
+     *
+     * @param objeto
+     */
     public void agregarTarjeta(Object objeto) {
         objetos.add(objeto);
 

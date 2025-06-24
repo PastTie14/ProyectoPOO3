@@ -27,14 +27,26 @@ public class Tipos implements Serializable {
         this.tipo = tipo;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTipo() {
         return tipo;
     }
 
+    /**
+     *
+     * @param tipo
+     */
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "";

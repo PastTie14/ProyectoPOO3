@@ -62,6 +62,9 @@ public class GestionarVehiculos extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public GestionarVehiculos() {
         
         controlador = Controlador.getInstance();
@@ -109,6 +112,9 @@ public class GestionarVehiculos extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelLista(){
         panelLista = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -125,8 +131,9 @@ public class GestionarVehiculos extends JFrame{
 
     }
     
-   
-    
+    /**
+     *
+     */
     public void generarPanelInfo() {
         panelInfo = CreadorComponentesVista.generarPanelBlanco();
 
@@ -206,18 +213,29 @@ public class GestionarVehiculos extends JFrame{
         panelPrincipal.add(panelInfo);
     }
     
+    /**
+     *
+     */
     public void configurarCombustibles(){
         for (Combustible combustible1 : controlador.getCombustibles()) {
             combustible.addItem(combustible1.toString());
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean validarEspacios(){
         return !marca.getText().isEmpty() || modelo.getText().isEmpty() || placa.getText().isEmpty() 
                 || tipos.getSelectedItemText()!="Combustion" && combustible.getSelectedItemText().isBlank()
                 || tipos.getSelectedItemText()!="Electrico" && cargadores.getSeleccionados().size()<1;
     }
     
+    /**
+     *
+     * @return
+     */
     public Vehiculo validarVehiculo(){
         String seleccionado = (String) tipos.getComboBox().getSelectedItem();
         Vehiculo temp = null;
@@ -229,6 +247,10 @@ public class GestionarVehiculos extends JFrame{
         return temp;
     }
     
+    /**
+     *
+     * @return
+     */
     public Vehiculo validarCombustion(){
         if (((Usuario)controlador.getClienteSeleccionado()).validarVehiculo(placa.getText())){
             VehiculoCombustible temp = new VehiculoCombustible(marca.getText(), modelo.getText(), controlador.getCombustibleDeString(combustible.getSelectedItemText()));
@@ -237,6 +259,10 @@ public class GestionarVehiculos extends JFrame{
         return null;
     }
     
+    /**
+     *
+     * @return
+     */
     public Vehiculo validarElectrico(){
         if (((Usuario)controlador.getClienteSeleccionado()).validarVehiculo(placa.getText())){
             VehiculoElectrico temp = new VehiculoElectrico(marca.getText(), modelo.getText(), cargadores.getSeleccionados());
@@ -245,6 +271,9 @@ public class GestionarVehiculos extends JFrame{
         return null;
     }
     
+    /**
+     *
+     */
     public void modificarVehiculo(){
         Vehiculo temp = controlador.getVehiculoSeleccionado();
         temp.setMarca(marca.getText());
@@ -259,11 +288,17 @@ public class GestionarVehiculos extends JFrame{
         }
     }
     
+    /**
+     *
+     */
     public void updatePanelLista(){
         panelLista.eliminarTodasLasTarjetas();
         panelLista.agregarTarjetas(((Usuario)controlador.getClienteSeleccionado()).getListaVehiculosFavoritos().toArray());
     }
     
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         panelOpciones = CreadorComponentesVista.generarPanelBlanco();
         int anchoPanelOpciones = (panelPrincipal.getWidth() / 3 - 40) * 2;
@@ -339,7 +374,10 @@ public class GestionarVehiculos extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(GestionarVehiculos::new);
     }

@@ -37,38 +37,74 @@ public class Conexion implements Serializable {
         this.consumo = consumo;
     }
 
+    /**
+     *
+     * @return
+     */
     public Ciudad getCiudad() {
         return ciudad;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getDistancia() {
         return distancia;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMinutos() {
         return minutos;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getConsumo() {
         return consumo;
     }
 
+    /**
+     *
+     * @param ciudad
+     */
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
 
+    /**
+     *
+     * @param distancia
+     */
     public void setDistancia(double distancia) {
         this.distancia = distancia;
     }
 
+    /**
+     *
+     * @param minutos
+     */
     public void setMinutos(int minutos) {
         this.minutos = minutos;
     }
 
+    /**
+     *
+     * @param consumo
+     */
     public void setConsumo(int consumo) {
         this.consumo = consumo;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Conexion{" + "ciudad: " + ciudad + ", distancia: " + distancia + '}';

@@ -75,14 +75,26 @@ public class Usuario extends Cliente implements LogIn {
         return listaVehiculosFavoritos.remove(vehiculo);
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Vehiculo> getListaVehiculosFavoritos() {
         return listaVehiculosFavoritos;
     }
 
+    /**
+     *
+     * @return
+     */
     public Vehiculo getVehiculoSeleccionado() {
         return vehiculoSeleccionado;
     }
 
+    /**
+     *
+     * @param vehiculoSeleccionado
+     */
     public void setVehiculoSeleccionado(Vehiculo vehiculoSeleccionado) {
         this.vehiculoSeleccionado = vehiculoSeleccionado;
     }

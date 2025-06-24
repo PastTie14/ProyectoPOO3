@@ -55,6 +55,9 @@ public class GestionarEstaciones extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public GestionarEstaciones() {
         
         controlador = Controlador.getInstance();
@@ -101,6 +104,9 @@ public class GestionarEstaciones extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelLista(){
         panelLista = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -118,8 +124,9 @@ public class GestionarEstaciones extends JFrame{
 
     }
     
-   
-    
+    /**
+     *
+     */
     public void generarPanelInfo() {
         panelInfo = CreadorComponentesVista.generarPanelBlanco();
 
@@ -194,6 +201,10 @@ public class GestionarEstaciones extends JFrame{
         panelPrincipal.add(panelInfo);
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean validarEspacios(){
         boolean txtFieldsVacios = !nombre.getText().isBlank() ;
         boolean comboBoxVacios = tiposEstaciones.getSelectedItemText().isBlank();
@@ -201,11 +212,17 @@ public class GestionarEstaciones extends JFrame{
         return txtFieldsVacios && comboBoxVacios && checkBoxListVacios;
     }
     
+    /**
+     *
+     */
     public void updatePanelLista(){
         panelLista.eliminarTodasLasTarjetas();
         panelLista.agregarTarjetas(controlador.getCiudades().toArray());
     }
     
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         panelOpciones = CreadorComponentesVista.generarPanelBlanco();
         int anchoPanelOpciones = (panelPrincipal.getWidth() / 3 - 40) * 2;
@@ -272,7 +289,10 @@ public class GestionarEstaciones extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(GestionarEstaciones::new);
     }

@@ -25,6 +25,11 @@ public class TextFieldPersonalizado extends JPanel {
     private Color textColor = Color.BLACK;
     private boolean isPlaceholderVisible = true;
     
+    /**
+     *
+     * @param title
+     * @param placeholder
+     */
     public TextFieldPersonalizado(String title, String placeholder) {
         this.placeholderText = placeholder;
         initComponents(title, placeholder);
@@ -88,6 +93,10 @@ public class TextFieldPersonalizado extends JPanel {
         });
     }
     
+    /**
+     *
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -104,10 +113,19 @@ public class TextFieldPersonalizado extends JPanel {
     }
     
     // Métodos públicos para interactuar con el componente
+
+    /**
+     *
+     * @return
+     */
     public String getText() {
         return isPlaceholderVisible ? "" : textField.getText();
     }
     
+    /**
+     *
+     * @param text
+     */
     public void setText(String text) {
         if (text == null || text.isEmpty()) {
             textField.setText(placeholderText);
@@ -120,10 +138,18 @@ public class TextFieldPersonalizado extends JPanel {
         }
     }
     
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         titleLabel.setText(title);
     }
     
+    /**
+     *
+     * @param placeholder
+     */
     public void setPlaceholder(String placeholder) {
         this.placeholderText = placeholder;
         if (isPlaceholderVisible) {
@@ -131,10 +157,18 @@ public class TextFieldPersonalizado extends JPanel {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public JTextField getTextField() {
         return textField;
     }
     
+    /**
+     *
+     * @param enabled
+     */
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         textField.setEnabled(enabled);

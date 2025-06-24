@@ -18,8 +18,12 @@ import javax.swing.*;
  */
 public class CreadorComponentesVista {
     
-    
-    
+    /**
+     *
+     * @param fatherWidth
+     * @param fatherHeight
+     * @return
+     */
     public static JPanel generarPanelUnTercio(int fatherWidth, int fatherHeight){
         JPanel temp = new JPanel();
         Color fondoPanel = new Color(201, 201, 201, 178);
@@ -30,6 +34,12 @@ public class CreadorComponentesVista {
         return temp;
     }
     
+    /**
+     *
+     * @param fatherWidth
+     * @param fatherHeight
+     * @return
+     */
     public static JPanel generarPanelMenu(int fatherWidth, int fatherHeight){
         JPanel temp = new JPanel();
         Color fondoPanel = new Color(201, 201, 201, 178);
@@ -40,6 +50,10 @@ public class CreadorComponentesVista {
         return temp;
     }
     
+    /**
+     *
+     * @return
+     */
     public static JPanel generarPanelBlanco(){
         JPanel temp = new JPanel();
         temp.setOpaque(true);
@@ -48,6 +62,13 @@ public class CreadorComponentesVista {
         return temp;
     }
     
+    /**
+     *
+     * @param nombreImagen
+     * @param anchoImagen
+     * @param altoImagen
+     * @return
+     */
     public static JButton generarBotonImagen(String nombreImagen, int anchoImagen, int altoImagen){
         ImageIcon tempIcon= UtilidadesVisuales.obtenerImagenDeRecursos(nombreImagen);
         Image tempImage = tempIcon.getImage().getScaledInstance(anchoImagen, altoImagen,  Image.SCALE_SMOOTH);
@@ -61,6 +82,12 @@ public class CreadorComponentesVista {
         return temp;
     }
     
+    /**
+     *
+     * @param nombreIcono
+     * @param texto
+     * @return
+     */
     public static JButton generarBotonConIcono(String nombreIcono, String texto) {
         ImageIcon tempIcon = UtilidadesVisuales.obtenerImagenDeRecursos(nombreIcono);
         Image tempImage = tempIcon.getImage().getScaledInstance(18, 18, Image.SCALE_SMOOTH);
@@ -68,7 +95,10 @@ public class CreadorComponentesVista {
         return new BotonRedondeado(texto, tempIcon);
     }
 
-    
+    /**
+     *
+     * @return
+     */
     public static JTextField generarTextField(){
         return null;
     }

@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Componente personalizado que muestra una lista de objetos con checkboxes.
- * Usa ícono de check personalizado si se proporciona.
+ * Componente personalizado que muestra una lista de objetos con checkboxes.Usa ícono de check personalizado si se proporciona.
  * 
  * @author Ian
+ * @param <T>
  */
 public class ListaCheckBoxPersonalizada<T> extends JPanel {
 
@@ -21,6 +21,10 @@ public class ListaCheckBoxPersonalizada<T> extends JPanel {
     private final List<T> objetos = new ArrayList<>();
     private Icon checkIcon = null;
 
+    /**
+     *
+     * @param elementos
+     */
     public ListaCheckBoxPersonalizada(T[] elementos) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE); // Fondo blanco para mantener estética uniforme
@@ -44,6 +48,10 @@ public class ListaCheckBoxPersonalizada<T> extends JPanel {
         }
     }
 
+    /**
+     *
+     * @param icono
+     */
     public void setCheckIcon(Icon icono) {
         this.checkIcon = icono;
         for (JCheckBox cb : checkBoxes) {
@@ -53,12 +61,20 @@ public class ListaCheckBoxPersonalizada<T> extends JPanel {
         repaint();
     }
 
+    /**
+     *
+     * @param habilitados
+     */
     public void setTodosHabilitados(boolean habilitados) {
         for (JCheckBox cb : checkBoxes) {
             cb.setEnabled(habilitados);
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<T> getSeleccionados() {
         ArrayList<T> seleccionados = new ArrayList<>();
         for (int i = 0; i < checkBoxes.size(); i++) {

@@ -21,7 +21,15 @@ import javax.swing.JFrame;
  * Implementa la interfaz {@code LogIn} para manejo de ingreso.
  */
 public class Cliente implements LogIn, Serializable {
+
+    /**
+     *
+     */
     protected String nombre;
+
+    /**
+     *
+     */
     protected String contrasennia;
 
     /**
@@ -35,18 +43,34 @@ public class Cliente implements LogIn, Serializable {
         this.contrasennia = contrasennia;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getContrasennia() {
         return contrasennia;
     }
 
+    /**
+     *
+     * @param contrasennia
+     */
     public void setContrasennia(String contrasennia) {
         this.contrasennia = contrasennia;
     }

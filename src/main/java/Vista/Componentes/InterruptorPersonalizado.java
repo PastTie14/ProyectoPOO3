@@ -23,6 +23,11 @@ public class InterruptorPersonalizado extends JComponent {
     private Color colorOff = new Color(189, 189, 189); // Gris
     private final List<ActionListener> listeners = new ArrayList<>();
 
+    /**
+     *
+     * @param textoOn
+     * @param textoOff
+     */
     public InterruptorPersonalizado(String textoOn, String textoOff) {
         this.textoOn = textoOn;
         this.textoOff = textoOff;
@@ -47,25 +52,46 @@ public class InterruptorPersonalizado extends JComponent {
         }
     }
 
+    /**
+     *
+     * @param listener
+     */
     public void addCambioListener(ActionListener listener) {
         listeners.add(listener);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isEncendido() {
         return encendido;
     }
 
+    /**
+     *
+     * @param encendido
+     */
     public void setEncendido(boolean encendido) {
         this.encendido = encendido;
         repaint();
     }
 
+    /**
+     *
+     * @param on
+     * @param off
+     */
     public void setTextos(String on, String off) {
         this.textoOn = on;
         this.textoOff = off;
         repaint();
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();

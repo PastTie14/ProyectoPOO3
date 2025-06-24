@@ -35,6 +35,9 @@ public class Registrar extends JFrame{
     
     Controlador controlador;
     
+    /**
+     *
+     */
     public Registrar() {
         controlador = Controlador.getInstance();
         
@@ -117,8 +120,10 @@ public class Registrar extends JFrame{
         repaint();
     }
     
-    
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(Ingresar::new);
     }

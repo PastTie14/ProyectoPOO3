@@ -59,6 +59,9 @@ public class GestionarConexiones extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public GestionarConexiones() {
         
         controlador = Controlador.getInstance();
@@ -105,6 +108,9 @@ public class GestionarConexiones extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelLista(){
         panelLista = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -123,8 +129,9 @@ public class GestionarConexiones extends JFrame{
 
     }
     
-   
-    
+    /**
+     *
+     */
     public void generarPanelInfo() {
         panelInfo = CreadorComponentesVista.generarPanelBlanco();
 
@@ -195,12 +202,19 @@ public class GestionarConexiones extends JFrame{
         panelPrincipal.add(panelInfo);
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean validarEspacios(){
         boolean numeros = distancia.getText().matches("(\\-?\\d*\\.?\\d+)") && minutos.getText().matches("^\\d+$") && costo.getText().matches("^\\d+$");
         boolean comboBoxVacios = ciudades.getSelectedItem()!=null;
         return numeros && comboBoxVacios && controlador.getCiudadSeleccionada() != null;
     }
     
+    /**
+     *
+     */
     public void settearComponentes(){
         if (conexionSeleccionada!=null){
             ciudades.seleccionarItem(conexionSeleccionada.getCiudad());
@@ -210,6 +224,9 @@ public class GestionarConexiones extends JFrame{
         }
     }
     
+    /**
+     *
+     */
     public void updateConexiones(){
         conexion.eliminarTodosLosItems();
         for (Object conexion1 : controlador.getCiudadSeleccionada().getConexiones()) {
@@ -217,6 +234,9 @@ public class GestionarConexiones extends JFrame{
         }
     }
     
+    /**
+     *
+     */
     public void updateCiudades(){
         ciudades.eliminarTodosLosItems();
         for (Ciudad ciudad : controlador.getCiudades()) {
@@ -224,12 +244,17 @@ public class GestionarConexiones extends JFrame{
         }
     }
     
-    
+    /**
+     *
+     */
     public void updatePanelLista(){
         panelLista.eliminarTodasLasTarjetas();
         panelLista.agregarTarjetas(controlador.getCiudades().toArray());
     }
     
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         panelOpciones = CreadorComponentesVista.generarPanelBlanco();
         int anchoPanelOpciones = (panelPrincipal.getWidth() / 3 - 40) * 2;
@@ -295,7 +320,10 @@ public class GestionarConexiones extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(GestionarConexiones::new);
     }

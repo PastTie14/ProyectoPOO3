@@ -19,6 +19,9 @@ import Modelos.CombustiblesCargadores.Combustible;
 public class VehiculoCombustible extends Vehiculo {
     private Combustible tipoCombustible;
 
+    /**
+     *
+     */
     public VehiculoCombustible() {
         super();
     }
@@ -35,10 +38,18 @@ public class VehiculoCombustible extends Vehiculo {
         this.tipoCombustible = tipoCombustible;
     }
 
+    /**
+     *
+     * @return
+     */
     public Combustible getCombustible() {
         return tipoCombustible;
     }
 
+    /**
+     *
+     * @param tipoCombustible
+     */
     public void setCombustible(Combustible tipoCombustible) {
         this.tipoCombustible = tipoCombustible;
     }

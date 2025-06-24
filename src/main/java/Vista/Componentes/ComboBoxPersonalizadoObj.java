@@ -21,6 +21,11 @@ public class ComboBoxPersonalizadoObj extends JPanel {
     private Color placeholderColor = Color.GRAY;
     private Color textColor = Color.BLACK;
 
+    /**
+     *
+     * @param title
+     * @param placeholder
+     */
     public ComboBoxPersonalizadoObj(String title, String placeholder) {
         this.placeholder = placeholder;
         initComponents(title);
@@ -85,6 +90,10 @@ public class ComboBoxPersonalizadoObj extends JPanel {
         });
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -95,6 +104,10 @@ public class ComboBoxPersonalizadoObj extends JPanel {
         super.paintComponent(g);
     }
 
+    /**
+     *
+     * @param item
+     */
     public void addItem(Object item) {
         if (isPlaceholderVisible && comboBox.getItemCount() == 1 && comboBox.getItemAt(0).equals(placeholder)) {
             comboBox.removeAllItems();
@@ -102,11 +115,19 @@ public class ComboBoxPersonalizadoObj extends JPanel {
         comboBox.addItem(item);
     }
 
+    /**
+     *
+     * @return
+     */
     public Object getSelectedItemText() {
         Object selected = comboBox.getSelectedItem();
         return isPlaceholderVisible ? "" : selected;
     }
     
+    /**
+     *
+     * @return
+     */
     public Object getSelectedItem() {
     Object selected = comboBox.getSelectedItem();
     if (selected == null || isPlaceholderVisible || placeholder.equals(selected)) {
@@ -115,11 +136,19 @@ public class ComboBoxPersonalizadoObj extends JPanel {
     return selected;
 }
 
+    /**
+     *
+     * @param text
+     */
     public void setSelectedItemText(String text) {
         comboBox.setSelectedItem(text);
         comboBox.setForeground(textColor);
         isPlaceholderVisible = false;
     }
+
+    /**
+     *
+     */
     public void eliminarTodosLosItems() {
         comboBox.removeAllItems();
         comboBox.addItem(placeholder);
@@ -128,6 +157,10 @@ public class ComboBoxPersonalizadoObj extends JPanel {
         isPlaceholderVisible = true;
     }
     
+    /**
+     *
+     * @param item
+     */
     public void seleccionarItem(Object item) {
         ComboBoxModel<Object> model = comboBox.getModel();
         for (int i = 0; i < model.getSize(); i++) {
@@ -140,12 +173,20 @@ public class ComboBoxPersonalizadoObj extends JPanel {
         }
     }
 
+    /**
+     *
+     * @param enabled
+     */
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         comboBox.setEnabled(enabled);
         titleLabel.setEnabled(enabled);
     }
 
+    /**
+     *
+     * @return
+     */
     public JComboBox<Object> getComboBox() {
         return comboBox;
     }

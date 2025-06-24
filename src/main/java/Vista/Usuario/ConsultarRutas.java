@@ -57,6 +57,9 @@ public class ConsultarRutas extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public ConsultarRutas() {
         
         controlador = Controlador.getInstance();
@@ -103,6 +106,9 @@ public class ConsultarRutas extends JFrame{
         this.repaint();
     }
     
+    /**
+     *
+     */
     public void generarPanelCiudadSalida(){
         panelCiudadSalida = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -120,6 +126,9 @@ public class ConsultarRutas extends JFrame{
         panelPrincipal.add(panelCiudadSalida);
     }
     
+    /**
+     *
+     */
     public void generarPanelCiudadDestino(){
         panelCiudadDestino = new PanelTarjetas();
         ImageIcon icono = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
@@ -136,6 +145,9 @@ public class ConsultarRutas extends JFrame{
         panelPrincipal.add(panelCiudadDestino);
     }
     
+    /**
+     *
+     */
     public void setInfo(){
         if (salida!=null){
             info.setText("<html>" +"Saliendo de: " + salida.getNombre() + "<br>" + "Destino: " +  ""  +  "</html>");
@@ -148,6 +160,10 @@ public class ConsultarRutas extends JFrame{
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean validarSelecciones(){
         if (salida!=null && destino !=null){
             if(salida!=destino)
@@ -156,7 +172,9 @@ public class ConsultarRutas extends JFrame{
         return false;
     }
     
-    
+    /**
+     *
+     */
     public void generarPanelOpciones(){
         
         
@@ -202,7 +220,10 @@ public class ConsultarRutas extends JFrame{
         panelPrincipal.add(panelOpciones);
     }
 
-    
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ConsultarRutas::new);
     }

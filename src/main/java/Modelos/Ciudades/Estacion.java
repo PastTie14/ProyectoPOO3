@@ -24,6 +24,10 @@ import java.util.ArrayList;
 public abstract class Estacion implements Serializable {
     private String nombre;
     private String tipoEstacion;
+
+    /**
+     *
+     */
     protected ArrayList<Tipos> suministros;
 
     /**
@@ -38,18 +42,34 @@ public abstract class Estacion implements Serializable {
         suministros = new ArrayList<>();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getTipoEstacion() {
         return tipoEstacion;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @param tipoEstacion
+     */
     public void setTipoEstacion(String tipoEstacion) {
         this.tipoEstacion = tipoEstacion;
     }
@@ -75,6 +95,10 @@ public abstract class Estacion implements Serializable {
      */
     public abstract boolean agregarSuministro(Tipos suministro);
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return nombre + ",Tipo: " + tipoEstacion;

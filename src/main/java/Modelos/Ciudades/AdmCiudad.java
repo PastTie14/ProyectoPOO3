@@ -152,14 +152,26 @@ public class AdmCiudad {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Ciudad> getCiudades() {
         return ciudades;
     }
 
+    /**
+     *
+     * @return
+     */
     public Ciudad getCiudadSeleccionada() {
         return ciudadSeleccionada;
     }
 
+    /**
+     *
+     * @param ciudadSeleccionada
+     */
     public void setCiudadSeleccionada(Ciudad ciudadSeleccionada) {
         this.ciudadSeleccionada = ciudadSeleccionada;
     }

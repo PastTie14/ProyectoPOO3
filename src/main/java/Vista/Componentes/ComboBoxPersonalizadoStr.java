@@ -20,6 +20,11 @@ public class ComboBoxPersonalizadoStr extends JPanel {
     private Color placeholderColor = Color.GRAY;
     private Color textColor = Color.BLACK;
 
+    /**
+     *
+     * @param title
+     * @param placeholder
+     */
     public ComboBoxPersonalizadoStr(String title, String placeholder) {
         this.placeholder = placeholder;
         initComponents(title);
@@ -84,6 +89,10 @@ public class ComboBoxPersonalizadoStr extends JPanel {
         });
     }
 
+    /**
+     *
+     * @param g
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g.create();
@@ -94,6 +103,10 @@ public class ComboBoxPersonalizadoStr extends JPanel {
         super.paintComponent(g);
     }
 
+    /**
+     *
+     * @param item
+     */
     public void addItem(String item) {
         if (isPlaceholderVisible && comboBox.getItemCount() == 1 && comboBox.getItemAt(0).equals(placeholder)) {
             comboBox.removeAllItems();
@@ -101,23 +114,39 @@ public class ComboBoxPersonalizadoStr extends JPanel {
         comboBox.addItem(item);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSelectedItemText() {
         String selected = (String) comboBox.getSelectedItem();
         return isPlaceholderVisible ? "" : selected;
     }
 
+    /**
+     *
+     * @param text
+     */
     public void setSelectedItemText(String text) {
         comboBox.setSelectedItem(text);
         comboBox.setForeground(textColor);
         isPlaceholderVisible = false;
     }
 
+    /**
+     *
+     * @param enabled
+     */
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         comboBox.setEnabled(enabled);
         titleLabel.setEnabled(enabled);
     }
 
+    /**
+     *
+     * @return
+     */
     public JComboBox<String> getComboBox() {
         return comboBox;
     }

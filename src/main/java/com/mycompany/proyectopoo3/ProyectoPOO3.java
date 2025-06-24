@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class ProyectoPOO3 {
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         
         Controlador co = Controlador.getInstance();

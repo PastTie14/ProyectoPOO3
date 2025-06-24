@@ -63,6 +63,9 @@ public class VerRutas extends JFrame{
     
     private Controlador controlador;
     
+    /**
+     *
+     */
     public VerRutas() {
         
         controlador = Controlador.getInstance();
@@ -119,8 +122,12 @@ public class VerRutas extends JFrame{
         panelPrincipal.add(scrollPanelRutas);
     }
     
-    
-
+    /**
+     *
+     * @param ruta
+     * @param salida
+     * @param destino
+     */
     public void agregarTarjetaRuta(ArrayList<Conexion> ruta,Ciudad salida, Ciudad destino) {
         JPanel tarjeta = new JPanel();
         tarjeta.setLayout(null);
@@ -168,6 +175,11 @@ public class VerRutas extends JFrame{
         panelContenedorRutas.revalidate();
         panelContenedorRutas.repaint();
     }
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(VerRutas::new);
     }

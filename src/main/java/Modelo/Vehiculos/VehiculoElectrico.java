@@ -25,6 +25,9 @@ import java.util.List;
 public class VehiculoElectrico extends Vehiculo {
     private ArrayList<Cargador> cargadoresCompatibles;
 
+    /**
+     *
+     */
     public VehiculoElectrico() {
         super();
         this.cargadoresCompatibles = new ArrayList<>();
@@ -43,10 +46,18 @@ public class VehiculoElectrico extends Vehiculo {
         this.cargadoresCompatibles = new ArrayList<>();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Cargador> getCargadoresCompatibles() {
         return cargadoresCompatibles;
     }
 
+    /**
+     *
+     * @param cargadoresCompatibles
+     */
     public void setCargadoresCompatibles(ArrayList<Cargador> cargadoresCompatibles) {
         this.cargadoresCompatibles = cargadoresCompatibles;
     }

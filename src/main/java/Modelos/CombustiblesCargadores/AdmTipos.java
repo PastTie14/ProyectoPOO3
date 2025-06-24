@@ -177,10 +177,18 @@ public class AdmTipos {
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Combustible> getCombustibles() {
         return combustibles;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<Cargador> getCargadores() {
         return cargadores;
     }

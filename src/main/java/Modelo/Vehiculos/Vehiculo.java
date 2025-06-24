@@ -20,6 +20,9 @@ public abstract class Vehiculo implements Serializable {
     private String modelo;
     private String placa;
 
+    /**
+     *
+     */
     public Vehiculo() {}
 
     /**
@@ -33,10 +36,18 @@ public abstract class Vehiculo implements Serializable {
         this.modelo = modelo;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getMarca() {
         return marca;
     }
 
+    /**
+     *
+     * @param marca
+     */
     public void setMarca(String marca) {
         this.marca = marca;
     }
@@ -48,18 +59,34 @@ public abstract class Vehiculo implements Serializable {
      */
     public abstract String getFullInfo();
 
+    /**
+     *
+     * @return
+     */
     public String getModelo() {
         return modelo;
     }
 
+    /**
+     *
+     * @param modelo
+     */
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPlaca() {
         return placa;
     }
 
+    /**
+     *
+     * @param placa
+     */
     public void setPlaca(String placa) {
         this.placa = placa;
     }
@@ -71,6 +98,10 @@ public abstract class Vehiculo implements Serializable {
      */
     public abstract String getTipo();
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return marca + "\n" + modelo;
