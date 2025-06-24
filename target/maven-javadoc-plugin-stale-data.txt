@@ -1,0 +1,53 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-encoding
+'UTF-8'
+-protected
+--release
+24
+-sourcepath
+'C:/Users/karol/Documents/NetBeansProjects/ProyectoPOO3/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2025. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/karol/Documents/NetBeansProjects/ProyectoPOO3/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'ProyectoPOO3 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'ProyectoPOO3 1.0-SNAPSHOT API'
+com.mycompany.proyectopoo3
+Controlador
+Modelo.Vehiculos
+Modelos.Ciudades
+Modelos.Clientes
+Modelos.CombustiblesCargadores
+Utilidades
+Vista.Admin
+Vista.Componentes
+Vista
+Vista.Usuario
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\src\main\java = 1750384987547
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\allclasses-index.html = 1750723438790
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\allpackages-index.html = 1750723438796
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\element-list = 1750723438085
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\help-doc.html = 1750723438962
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\index-all.html = 1750723438943
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\index.html = 1750723438734
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\member-search-index.js = 1750723438820
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\module-search-index.js = 1750723438803
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\overview-summary.html = 1750723438954
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\overview-tree.html = 1750723438727
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\package-search-index.js = 1750723438807
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\search.html = 1750723438949
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\serialized-form.html = 1750723438356
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\tag-search-index.js = 1750723438824
+C:\Users\karol\Documents\NetBeansProjects\ProyectoPOO3\target\reports\apidocs\type-search-index.js = 1750723438812
