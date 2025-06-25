@@ -58,16 +58,19 @@ public class RutaMapaPopUp extends JDialog {
         super(parent, "Ruta en Mapa - Costa Rica", true);
         this.ciudadSalida = ciudadSalida;
         this.ruta = ruta;
-        
+
         initComponents();
         setupMapa();
-        mostrarRuta();
-        
+
+        // MOSTRAR RUTA DESPUÉS DEL SETUP DEL MAPA
+        SwingUtilities.invokeLater(() -> mostrarRuta());
+
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setSize(900, 700);
         setLocationRelativeTo(parent);
         setResizable(true);
     }
+
     
     /**
      * Inicializa los componentes de la interfaz
@@ -134,42 +137,48 @@ public class RutaMapaPopUp extends JDialog {
     
     /**
      * Muestra la ruta en el mapa con waypoints y líneas
+     * SOLUCION PRINCIPAL: Orden correcto de painters y configuración mejorada
      */
     private void mostrarRuta() {
         if (ruta == null || ruta.isEmpty()) {
             return;
         }
-        
-        // Crear waypoints para todas las ciudades en la ruta
+
         Set<Waypoint> waypoints = new HashSet<>();
-        
-        // Agregar ciudad de salida
+
         GeoPosition posicionSalida = new GeoPosition(ciudadSalida.getLatitudY(), ciudadSalida.getLongitudX());
         waypoints.add(new DefaultWaypoint(posicionSalida));
-        
-        // Agregar ciudades destino de cada conexión
+
         for (Conexion conexion : ruta) {
             Ciudad ciudadDestino = conexion.getCiudad();
             GeoPosition posicion = new GeoPosition(ciudadDestino.getLatitudY(), ciudadDestino.getLongitudX());
             waypoints.add(new DefaultWaypoint(posicion));
         }
-        
-        // Crear painter para los waypoints
-        WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<Waypoint>();
+
+        RoutePainter routePainter = new RoutePainter();
+
+        WaypointPainter<Waypoint> waypointPainter = new WaypointPainter<>();
         waypointPainter.setWaypoints(waypoints);
         waypointPainter.setRenderer(new WaypointRenderer());
-        
-        // Crear painter para las líneas de la ruta
-        RoutePainter routePainter = new RoutePainter();
-        
-        // Combinar painters
+
         List<Painter<JXMapViewer>> painters = new ArrayList<>();
         painters.add(routePainter);
         painters.add(waypointPainter);
-        
+
         CompoundPainter<JXMapViewer> painter = new CompoundPainter<>(painters);
+        painter.setCacheable(false);
+
+        // NUEVO: Limpia overlay anterior
+        mapViewer.setOverlayPainter(null);
         mapViewer.setOverlayPainter(painter);
+
+        // Forzar repintado
+        SwingUtilities.invokeLater(() -> {
+            mapViewer.repaint();
+            mapViewer.revalidate();
+        });
     }
+
     
     /**
      * Actualiza la información de la ruta en el panel superior
@@ -240,6 +249,9 @@ public class RutaMapaPopUp extends JDialog {
         positions.add(new GeoPosition(maxLat + marginLat, maxLon + marginLon));
         
         mapViewer.zoomToBestFit(positions, 0.7);
+        
+        // SOLUCION ADICIONAL: Forzar repintado después del zoom
+        SwingUtilities.invokeLater(() -> mapViewer.repaint());
     }
     
     /**
@@ -250,48 +262,56 @@ public class RutaMapaPopUp extends JDialog {
         GeoPosition centroCostaRica = new GeoPosition(9.7489, -83.7534);
         mapViewer.setAddressLocation(centroCostaRica);
         mapViewer.setZoom(7);
+        
+        // Forzar repintado después del zoom
+        SwingUtilities.invokeLater(() -> mapViewer.repaint());
     }
     
     /**
      * Renderer personalizado para los waypoints
+     * MEJORADO: Con mejor renderizado y z-order
      */
     private class WaypointRenderer implements org.jxmapviewer.viewer.WaypointRenderer<Waypoint> {
         @Override
         public void paintWaypoint(Graphics2D g, JXMapViewer map, Waypoint waypoint) {
             g = (Graphics2D) g.create();
+            
+            // MEJORA: Configuración de renderizado de alta calidad
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
             
             Point2D point = map.getTileFactory().geoToPixel(waypoint.getPosition(), map.getZoom());
             int x = (int) point.getX();
             int y = (int) point.getY();
             
             // Determinar si es la ciudad de salida
-            boolean esCiudadSalida = waypoint.getPosition().getLatitude() == ciudadSalida.getLatitudY() 
-                                   && waypoint.getPosition().getLongitude() == ciudadSalida.getLongitudX();
+            boolean esCiudadSalida = Math.abs(waypoint.getPosition().getLatitude() - ciudadSalida.getLatitudY()) < 0.0001
+                                   && Math.abs(waypoint.getPosition().getLongitude() - ciudadSalida.getLongitudX()) < 0.0001;
             
             if (esCiudadSalida) {
-                // Ciudad de salida - círculo verde más grande
-                g.setColor(Color.GREEN);
-                g.fillOval(x - 12, y - 12, 24, 24);
+                // Ciudad de salida - círculo verde más grande con mejor visibilidad
+                g.setColor(new Color(34, 139, 34, 220)); // Verde semi-transparente
+                g.fillOval(x - 15, y - 15, 30, 30);
                 g.setColor(Color.BLACK);
-                g.setStroke(new BasicStroke(2));
-                g.drawOval(x - 12, y - 12, 24, 24);
+                g.setStroke(new BasicStroke(3));
+                g.drawOval(x - 15, y - 15, 30, 30);
                 
-                // Texto "INICIO"
+                // Texto "S" más visible
                 g.setColor(Color.WHITE);
-                g.setFont(new Font("Arial", Font.BOLD, 10));
+                g.setFont(new Font("Arial", Font.BOLD, 14));
                 FontMetrics fm = g.getFontMetrics();
                 String texto = "S";
                 int textoX = x - fm.stringWidth(texto) / 2;
                 int textoY = y + fm.getAscent() / 2 - 1;
                 g.drawString(texto, textoX, textoY);
             } else {
-                // Ciudades de destino - círculos rojos
-                g.setColor(Color.RED);
-                g.fillOval(x - 10, y - 10, 20, 20);
-                g.setColor(Color.WHITE);
+                // Ciudades de destino - círculos rojos más visibles
+                g.setColor(new Color(220, 20, 60, 220)); // Rojo semi-transparente
+                g.fillOval(x - 12, y - 12, 24, 24);
+                g.setColor(Color.BLACK);
                 g.setStroke(new BasicStroke(2));
-                g.drawOval(x - 10, y - 10, 20, 20);
+                g.drawOval(x - 12, y - 12, 24, 24);
                 
                 // Número de orden en la ruta
                 g.setColor(Color.WHITE);
@@ -302,8 +322,8 @@ public class RutaMapaPopUp extends JDialog {
                 int orden = -1;
                 for (int i = 0; i < ruta.size(); i++) {
                     Ciudad ciudadRuta = ruta.get(i).getCiudad();
-                    if (ciudadRuta.getLatitudY() == waypoint.getPosition().getLatitude() 
-                        && ciudadRuta.getLongitudX() == waypoint.getPosition().getLongitude()) {
+                    if (Math.abs(ciudadRuta.getLatitudY() - waypoint.getPosition().getLatitude()) < 0.0001
+                        && Math.abs(ciudadRuta.getLongitudX() - waypoint.getPosition().getLongitude()) < 0.0001) {
                         orden = i + 1;
                         break;
                     }
@@ -322,7 +342,8 @@ public class RutaMapaPopUp extends JDialog {
     }
     
     /**
-     * Painter para dibujar las líneas de la ruta
+     * Painter mejorado para dibujar las líneas de la ruta
+     * SOLUCION PRINCIPAL: Mejor gestión del z-order y renderizado
      */
     private class RoutePainter implements Painter<JXMapViewer> {
         @Override
@@ -330,76 +351,102 @@ public class RutaMapaPopUp extends JDialog {
             if (ruta == null || ruta.isEmpty()) {
                 return;
             }
-            
+
+            System.out.println("Pintando ruta..."); // Para depurar
+
             g = (Graphics2D) g.create();
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            
-            // Configurar estilo de línea
-            g.setColor(Color.BLUE);
-            g.setStroke(new BasicStroke(4, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            
-            // Punto de inicio (ciudad de salida)
+            g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
+            Rectangle viewport = map.getViewportBounds();
+
+            g.setStroke(new BasicStroke(6f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+
             GeoPosition posicionActual = new GeoPosition(ciudadSalida.getLatitudY(), ciudadSalida.getLongitudX());
             Point2D puntoActual = map.getTileFactory().geoToPixel(posicionActual, map.getZoom());
-            
-            // Dibujar línea para cada conexión en secuencia
+            puntoActual.setLocation(puntoActual.getX() - viewport.getX(), puntoActual.getY() - viewport.getY());
+
             for (Conexion conexion : ruta) {
                 Ciudad ciudadDestino = conexion.getCiudad();
                 GeoPosition posicionDestino = new GeoPosition(ciudadDestino.getLatitudY(), ciudadDestino.getLongitudX());
                 Point2D puntoDestino = map.getTileFactory().geoToPixel(posicionDestino, map.getZoom());
-                
-                // Dibujar línea desde posición actual hasta destino
-                g.drawLine(
-                    (int) puntoActual.getX(), (int) puntoActual.getY(),
-                    (int) puntoDestino.getX(), (int) puntoDestino.getY()
-                );
-                
-                // Dibujar flecha direccional
+                puntoDestino.setLocation(puntoDestino.getX() - viewport.getX(), puntoDestino.getY() - viewport.getY());
+
+                // Dibujar línea de fondo para contraste
+                g.setColor(new Color(0, 0, 0, 100));
+                g.setStroke(new BasicStroke(8, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g.drawLine((int) puntoActual.getX(), (int) puntoActual.getY(),
+                           (int) puntoDestino.getX(), (int) puntoDestino.getY());
+
+                // Dibujar línea principal
+                g.setColor(new Color(30, 144, 255, 200));
+                g.setStroke(new BasicStroke(6, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g.drawLine((int) puntoActual.getX(), (int) puntoActual.getY(),
+                           (int) puntoDestino.getX(), (int) puntoDestino.getY());
+
+                // Dibujar flecha
                 dibujarFlecha(g, puntoActual, puntoDestino);
-                
-                // Actualizar posición actual para la siguiente iteración
+
+                // Siguiente punto
                 puntoActual = puntoDestino;
-                posicionActual = posicionDestino;
             }
-            
+
             g.dispose();
+        }
+
+        
+        /**
+         * Verifica si un punto está visible en el área de dibujo
+         */
+        private boolean estaPuntoVisible(Point2D punto, int ancho, int alto) {
+            return punto.getX() >= -50 && punto.getX() <= ancho + 50 &&
+                   punto.getY() >= -50 && punto.getY() <= alto + 50;
         }
         
         /**
          * Dibuja una pequeña flecha para indicar la dirección de la ruta
+         * MEJORADA: Con mejor visibilidad y contraste
          */
         private void dibujarFlecha(Graphics2D g, Point2D desde, Point2D hacia) {
             double dx = hacia.getX() - desde.getX();
             double dy = hacia.getY() - desde.getY();
             double distancia = Math.sqrt(dx * dx + dy * dy);
             
-            if (distancia < 20) return; // No dibujar flecha si la distancia es muy pequeña
+            if (distancia < 30) return; // No dibujar flecha si la distancia es muy pequeña
             
             // Normalizar el vector dirección
             dx /= distancia;
             dy /= distancia;
             
-            // Punto donde colocar la flecha (75% del camino)
-            double puntoFlechaX = desde.getX() + (hacia.getX() - desde.getX()) * 0.75;
-            double puntoFlechaY = desde.getY() + (hacia.getY() - desde.getY()) * 0.75;
+            // Punto donde colocar la flecha (60% del camino)
+            double puntoFlechaX = desde.getX() + (hacia.getX() - desde.getX()) * 0.6;
+            double puntoFlechaY = desde.getY() + (hacia.getY() - desde.getY()) * 0.6;
             
             // Tamaño de la flecha
-            double tamañoFlecha = 12;
+            double tamañoFlecha = 15;
             
             // Calcular puntos de la flecha (triángulo)
-            double x1 = puntoFlechaX - tamañoFlecha * dx - tamañoFlecha * 0.4 * dy;
-            double y1 = puntoFlechaY - tamañoFlecha * dy + tamañoFlecha * 0.4 * dx;
+            double x1 = puntoFlechaX - tamañoFlecha * dx - tamañoFlecha * 0.5 * dy;
+            double y1 = puntoFlechaY - tamañoFlecha * dy + tamañoFlecha * 0.5 * dx;
             
-            double x2 = puntoFlechaX - tamañoFlecha * dx + tamañoFlecha * 0.4 * dy;
-            double y2 = puntoFlechaY - tamañoFlecha * dy - tamañoFlecha * 0.4 * dx;
+            double x2 = puntoFlechaX - tamañoFlecha * dx + tamañoFlecha * 0.5 * dy;
+            double y2 = puntoFlechaY - tamañoFlecha * dy - tamañoFlecha * 0.5 * dx;
             
             // Dibujar la flecha como triángulo relleno
             int[] xPoints = {(int) puntoFlechaX, (int) x1, (int) x2};
             int[] yPoints = {(int) puntoFlechaY, (int) y1, (int) y2};
             
-            g.setColor(Color.RED);
+            // Borde oscuro para contraste
+            g.setColor(new Color(0, 0, 0, 150));
             g.fillPolygon(xPoints, yPoints, 3);
+            
+            // Flecha principal
+            g.setColor(new Color(255, 69, 0, 200)); // Naranja rojizo
+            g.fillPolygon(xPoints, yPoints, 3);
+            
             g.setColor(Color.BLACK);
+            g.setStroke(new BasicStroke(1));
             g.drawPolygon(xPoints, yPoints, 3);
         }
     }
