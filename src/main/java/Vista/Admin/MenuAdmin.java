@@ -9,6 +9,7 @@ import Modelos.Ciudades.Ciudad;
 import Vista.Componentes.CreadorComponentesVista;
 import Vista.Componentes.PanelConFondo;
 import Vista.Componentes.PanelTarjetas;
+import Vista.Ingresar;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -50,6 +51,7 @@ public class MenuAdmin extends JFrame{
     public MenuAdmin() {
         
         controlador = Controlador.getInstance();
+        controlador.setCiudadSeleccionada(null);
         
         // Obtener resolución de pantalla
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -85,6 +87,8 @@ public class MenuAdmin extends JFrame{
         panelPrincipal.add(abandonar);
         abandonar.setBounds(panelPrincipal.getWidth()-25, 10, 20, 20);
         abandonar.addActionListener(e -> {
+            Ingresar temp = new Ingresar();
+            temp.setVisible(true);
             dispose();
         });
         

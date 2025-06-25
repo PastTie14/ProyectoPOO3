@@ -232,6 +232,7 @@ public final class Controlador {
      */
     public boolean eliminarCiudad() {
         if (getCiudadSeleccionada() != null) {
+            adminCiudades.eliminarConexionesHacia(getCiudadSeleccionada());
             adminCiudades.eliminar(getCiudadSeleccionada());
         }
         return false;

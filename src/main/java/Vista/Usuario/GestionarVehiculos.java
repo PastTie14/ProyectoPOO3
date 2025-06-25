@@ -244,6 +244,7 @@ public class GestionarVehiculos extends JFrame{
             } else if ("Electrico".equalsIgnoreCase(seleccionado)) {
                 temp = validarElectrico();
             }
+        temp.setPlaca(placa.getText());
         return temp;
     }
     
@@ -254,6 +255,7 @@ public class GestionarVehiculos extends JFrame{
     public Vehiculo validarCombustion(){
         if (((Usuario)controlador.getClienteSeleccionado()).validarVehiculo(placa.getText())){
             VehiculoCombustible temp = new VehiculoCombustible(marca.getText(), modelo.getText(), controlador.getCombustibleDeString(combustible.getSelectedItemText()));
+            temp.setPlaca(placa.getText());
             return temp;
         }
         return null;
@@ -265,7 +267,9 @@ public class GestionarVehiculos extends JFrame{
      */
     public Vehiculo validarElectrico(){
         if (((Usuario)controlador.getClienteSeleccionado()).validarVehiculo(placa.getText())){
+            System.out.println(cargadores.getSeleccionados());
             VehiculoElectrico temp = new VehiculoElectrico(marca.getText(), modelo.getText(), cargadores.getSeleccionados());
+            temp.setPlaca(placa.getText());
             return temp;
         }
         return null;

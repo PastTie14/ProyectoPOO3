@@ -57,6 +57,7 @@ public class GestionarCiudades extends JFrame{
     public GestionarCiudades() {
         
         controlador = Controlador.getInstance();
+        controlador.setCiudadSeleccionada(null);
         
         // Obtener resolución de pantalla
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

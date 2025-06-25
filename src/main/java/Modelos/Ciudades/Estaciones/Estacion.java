@@ -101,6 +101,6 @@ public abstract class Estacion implements Serializable {
      */
     @Override
     public String toString() {
-        return nombre + ",Tipo: " + tipoEstacion;
+        return nombre + "( Tipo: " + tipoEstacion + "(" + suministros + "))";
     }
 }

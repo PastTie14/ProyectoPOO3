@@ -12,6 +12,7 @@ import Vista.Componentes.PanelConFondo;
 import Vista.Componentes.PanelTarjetas;
 import Vista.Componentes.PasswordFieldPersonalizado;
 import Vista.Componentes.TextFieldPersonalizado;
+import Vista.Ingresar;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -91,6 +92,8 @@ public class MenuUsuario extends JFrame{
         panelPrincipal.add(abandonar);
         abandonar.setBounds(panelPrincipal.getWidth()-25, 10, 20, 20);
         abandonar.addActionListener(e -> {
+            Ingresar temp = new Ingresar();
+            temp.setVisible(true);
             dispose();
         });
         
@@ -145,7 +148,7 @@ public class MenuUsuario extends JFrame{
         
         info = new JLabel("", SwingConstants.CENTER);
         info.setFont(new Font("Arial", Font.PLAIN, 20));
-        info.setBounds(xCentrado, 80, labelWidth, subTituloHeight);
+        info.setBounds(xCentrado, 80, labelWidth, panelInfo.getHeight()-50);
         
         if (controlador.getVehiculoSeleccionado()!=null){
             info.setText(controlador.getVehiculoSeleccionado().getFullInfo());

@@ -61,6 +61,7 @@ public class GestionarEstaciones extends JFrame{
     public GestionarEstaciones() {
         
         controlador = Controlador.getInstance();
+        controlador.setCiudadSeleccionada(null);
         
         // Obtener resolución de pantalla
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -115,7 +116,10 @@ public class GestionarEstaciones extends JFrame{
         panelLista.setIconoSelected(icono);
         panelLista.setOnSeleccionarTarjeta(obj -> {
             controlador.setCiudadSeleccionada((Ciudad) obj);
-
+            estaciones.eliminarTodosLosItems();
+            for (Estacion estacion : controlador.getCiudadSeleccionada().getEstaciones()) {
+                estaciones.addItem(estacion);
+            }
         });
         panelLista.setBounds(30, 20, 
                 panelPrincipal.getWidth()/3-20, panelPrincipal.getHeight()-40);
@@ -164,8 +168,8 @@ public class GestionarEstaciones extends JFrame{
         estaciones.setBounds(xComponentes, subTitulo.getY() + subTitulo.getHeight() + 25, anchoComponentes, altoComponentes);
         nombre.setBounds(xComponentes, estaciones.getY() + estaciones.getHeight() + 25, anchoComponentes, altoComponentes);
         tiposEstaciones.setBounds(xComponentes, nombre.getY() + nombre.getHeight() + 25, anchoComponentes, altoComponentes);
-        tiposCombustibles.setBounds(xComponentes, tiposEstaciones.getY() + tiposEstaciones.getHeight() + 25, anchoComponentes, altoComponentes);
-        tiposCargadores.setBounds(xComponentes, tiposEstaciones.getY() + tiposEstaciones.getHeight() + 25, anchoComponentes, altoComponentes);
+        tiposCombustibles.setBounds(xComponentes, tiposEstaciones.getY() + tiposEstaciones.getHeight() + 25, anchoComponentes, panelInfo.getHeight());
+        tiposCargadores.setBounds(xComponentes, tiposEstaciones.getY() + tiposEstaciones.getHeight() + 25, anchoComponentes, panelInfo.getHeight());
         
         ImageIcon temp = Utilidades.UtilidadesVisuales.obtenerImagenDeRecursos("seleccionado.png");
         Image tempImage = temp.getImage().getScaledInstance(15, 15,  Image.SCALE_SMOOTH);
@@ -191,6 +195,15 @@ public class GestionarEstaciones extends JFrame{
             }
         });
         
+        estaciones.getComboBox().addActionListener(e -> {
+            if (estaciones.getComboBox().getSelectedItem() instanceof Estacion){
+                Estacion seleccionado = (Estacion) estaciones.getComboBox().getSelectedItem();
+                nombre.setText(seleccionado.getNombre());
+                tiposEstaciones.setSelectedItem(seleccionado.getTipoEstacion().equals("Combustibles") ? 0 : 1);
+                
+            }
+        });
+        
         panelInfo.add(estaciones);
         panelInfo.add(nombre);
         panelInfo.add(tiposCombustibles);
@@ -207,9 +220,17 @@ public class GestionarEstaciones extends JFrame{
      */
     public boolean validarEspacios(){
         boolean txtFieldsVacios = !nombre.getText().isBlank() ;
-        boolean comboBoxVacios = tiposEstaciones.getSelectedItemText().isBlank();
-        boolean checkBoxListVacios = tiposCargadores.getSeleccionados().size()<1 || tiposCombustibles.getSeleccionados().size()<1;
-        return txtFieldsVacios && comboBoxVacios && checkBoxListVacios;
+        String estacion = tiposEstaciones.getSelectedItemText();
+        boolean checkBoxListVacios;
+        if (tiposCargadores.isVisible()){
+            checkBoxListVacios = tiposCargadores.getSeleccionados().size()<1;
+            return txtFieldsVacios && !checkBoxListVacios;
+        }
+        checkBoxListVacios = tiposCombustibles.getSeleccionados().size()<1;
+        return txtFieldsVacios &&  !checkBoxListVacios;
+        
+       
+        
     }
     
     /**
@@ -244,10 +265,11 @@ public class GestionarEstaciones extends JFrame{
         
         
         botonGuardar.addActionListener(e -> {
+            if(controlador.getCiudadSeleccionada()!=null) {
             if (validarEspacios()){
                 if (controlador.getCiudadSeleccionada()!=null){
                     boolean res = controlador.guardarEstacion(nombre.getText(), tiposEstaciones.getSelectedItemText(),
-                             tiposEstaciones.getSelectedItemText().equals("Combustibles") ? tiposCargadores.getSeleccionados().toArray() : tiposCombustibles.getSeleccionados().toArray()
+                             tiposEstaciones.getSelectedItemText().equals("Combustibles") ? tiposCombustibles.getSeleccionados().toArray() : tiposCargadores.getSeleccionados().toArray()
                             );
                     if (res)
                         updatePanelLista();
@@ -257,12 +279,14 @@ public class GestionarEstaciones extends JFrame{
             }else
                 JOptionPane.showMessageDialog(this, "Error Datos incompletos");
             //dispose();
+            }else
+                JOptionPane.showMessageDialog(this, "Error Debe seleccionar una ciudad");
         }   );
         
         botonModificar.addActionListener(e -> {
             if (validarEspacios()){
                 controlador.modificarEstacion((Estacion) estaciones.getSelectedItem(), nombre.getText(),
-                        tiposEstaciones.getSelectedItemText().equals("Combustibles") ? tiposCargadores.getSeleccionados().toArray() : tiposCombustibles.getSeleccionados().toArray() );
+                        tiposEstaciones.getSelectedItemText().equals("Combustibles") ? tiposCombustibles.getSeleccionados().toArray() : tiposCargadores.getSeleccionados().toArray() );
                updatePanelLista();
             }else
                 JOptionPane.showMessageDialog(this, "Error Datos incompletos");
@@ -273,7 +297,7 @@ public class GestionarEstaciones extends JFrame{
             if (estaciones.getSelectedItem()!=null){
                 if(JOptionPane.showConfirmDialog(this, "Seguro de que desea eliminar la Estacion" 
                         + estaciones.getSelectedItemText().toString(),"Confirmación", JOptionPane.YES_NO_OPTION)==0){
-                    controlador.eliminarCiudad();
+                    controlador.eliminarEstacion((Estacion) estaciones.getSelectedItem());
                     updatePanelLista();
                 }
             }else

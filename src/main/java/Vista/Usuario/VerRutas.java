@@ -162,13 +162,14 @@ public class VerRutas extends JFrame{
         lblCiudades.setBounds(20, lblDistancia.getY() + lblDistancia.getHeight() + 5, 600, 20);
         tarjeta.add(lblCiudades);
 
-        //JButton btnVerMapa = new JButton("🗺 Ver mapa");
-        //btnVerMapa.setBounds(tarjeta.getPreferredSize().width - 130, 35, 100, 40);
-        // btnVerMapa.addActionListener(e -> {
-        //     // Acción personalizada
-        // });
+        JButton btnVerMapa = new JButton("🗺 Ver mapa");
+        btnVerMapa.setBounds(tarjeta.getPreferredSize().width - 130, 35, 100, 40);
+        btnVerMapa.addActionListener(e -> {
+             RutaMapaPopUp temp = new RutaMapaPopUp(this, salida, ruta);
+             temp.setVisible(true);
+         });
 
-        //tarjeta.add(btnVerMapa);
+        tarjeta.add(btnVerMapa);
 
         panelContenedorRutas.add(Box.createVerticalStrut(10));
         panelContenedorRutas.add(tarjeta);

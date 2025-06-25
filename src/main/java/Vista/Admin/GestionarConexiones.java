@@ -65,6 +65,7 @@ public class GestionarConexiones extends JFrame{
     public GestionarConexiones() {
         
         controlador = Controlador.getInstance();
+        controlador.setCiudadSeleccionada(null);
         
         // Obtener resolución de pantalla
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -185,8 +186,11 @@ public class GestionarConexiones extends JFrame{
         });
         
         ciudades.getComboBox().addActionListener(e -> {
-            ciudadConectada = (Ciudad) ciudades.getSelectedItem();
-            settearComponentes();
+            if(ciudades.getSelectedItem() instanceof Ciudad){
+                ciudadConectada = (Ciudad) ciudades.getSelectedItem();
+                settearComponentes();
+            }
+            
             
         });
         
@@ -231,6 +235,12 @@ public class GestionarConexiones extends JFrame{
         conexion.eliminarTodosLosItems();
         for (Object conexion1 : controlador.getCiudadSeleccionada().getConexiones()) {
             conexion.addItem(conexion1);
+        }
+        ciudades.eliminarTodosLosItems();
+        for (Ciudad ciudad : controlador.getCiudades()) {
+            if(!(ciudad == controlador.getCiudadSeleccionada())){
+                ciudades.addItem(ciudad);
+            }
         }
     }
     
@@ -277,14 +287,17 @@ public class GestionarConexiones extends JFrame{
         
         botonGuardar.addActionListener(e -> {
             if (validarEspacios()){
-                if (controlador.getCiudadSeleccionada()!=null){
+                if (controlador.getCiudadSeleccionada()!=null && ciudadConectada!=null){
                     boolean res = controlador.guardarConexion(ciudadConectada, Double.parseDouble(distancia.getText()), 
                             Integer.parseInt(minutos.getText()), Integer.parseInt(costo.getText()));
-                    if (res)
+                    if (res){
                         updatePanelLista();
+                        JOptionPane.showMessageDialog(this, "Conexion guardada con exito");
+                    }
                     else
                         JOptionPane.showMessageDialog(this, "Ya existe una conexion hacia la ciudad proporcionada");
-                }
+                }else
+                    JOptionPane.showMessageDialog(this, "Error No se ha seleccionado una ciudad");
             }else
                 JOptionPane.showMessageDialog(this, "Error Datos incompletos");
             //dispose();

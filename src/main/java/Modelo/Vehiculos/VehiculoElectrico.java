@@ -43,7 +43,7 @@ public class VehiculoElectrico extends Vehiculo {
      */
     public VehiculoElectrico(String marca, String modelo, List<Cargador> cargadoresCompatibles) {
         super(marca, modelo);
-        this.cargadoresCompatibles = new ArrayList<>();
+        this.cargadoresCompatibles = new ArrayList<>(cargadoresCompatibles);
     }
 
     /**
@@ -83,7 +83,7 @@ public class VehiculoElectrico extends Vehiculo {
         for (Cargador cargador : cargadoresCompatibles) {
             str += cargador.toString() + ", ";
         }
-        return str.isEmpty() ? "Ninguno" : str.substring(0, str.length() - 2);
+        return str.isEmpty() ? "Ninguno" : str;
     }
 
     /**
@@ -103,9 +103,9 @@ public class VehiculoElectrico extends Vehiculo {
      */
     @Override
     public String getFullInfo() {
-        return "Marca: " + getMarca() + "\n"
-             + "Modelo: " + getModelo() + "\n"
-             + "Placa: " + getPlaca() + "\n"
-             + "Tipos de Cargadores: " + getTiposDeCargadoresAsString();
+        return "<html> Marca: " + getMarca() + "\n"
+             + "<br>Modelo: " + getModelo() + "\n"
+             + "<br>Placa: " + getPlaca() + "\n"
+             + "<br>Tipos de Cargadores: " + getTiposDeCargadoresAsString() + "</html>";
     }
 }

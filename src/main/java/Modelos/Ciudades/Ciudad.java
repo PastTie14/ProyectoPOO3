@@ -111,7 +111,7 @@ public class Ciudad implements Serializable {
     public String getConexionesAsString() {
         String str = "";
         for (Conexion conexion : conexiones) {
-            str += conexion + ", ";
+            str += conexion.getCiudad().getNombre() + ", ";
         }
         return str;
     }
@@ -152,7 +152,7 @@ public class Ciudad implements Serializable {
              + " Longitud: " + longitudX + "<br>"
              + " Latitud: " + latitudY + "<br>"
              + " Conexiones: " + getConexionesAsString() + "<br>"
-             + " Estaciones: " + getConexionesAsString()
+             + " Estaciones: " + getEstacionesAsString()
              + "</html>";
     }
 

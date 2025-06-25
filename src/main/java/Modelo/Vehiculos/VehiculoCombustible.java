@@ -71,10 +71,10 @@ public class VehiculoCombustible extends Vehiculo {
      */
     @Override
     public String getFullInfo() {
-        return "Marca: " + getMarca() + "\n" 
-             + "Modelo: " + getModelo() + "\n" 
-             + "Placa: " + getPlaca() + "\n" 
-             + "Tipo de Combustible: " + tipoCombustible;
+        return "<html> Marca: " + getMarca() + "<br>" 
+             + "Modelo: " + getModelo() + "<br>" 
+             + "Placa: " + getPlaca() + "<br>" 
+             + "Tipo de Combustible: " + tipoCombustible + "</hmtl>";
     }
 }
 

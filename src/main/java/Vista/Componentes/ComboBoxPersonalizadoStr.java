@@ -132,6 +132,10 @@ public class ComboBoxPersonalizadoStr extends JPanel {
         comboBox.setForeground(textColor);
         isPlaceholderVisible = false;
     }
+    
+    public void setSelectedItem(int index){
+        comboBox.setSelectedIndex(index);
+    }
 
     /**
      *

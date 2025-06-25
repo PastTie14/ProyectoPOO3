@@ -109,8 +109,11 @@ public class ComboBoxPersonalizadoObj extends JPanel {
      * @param item
      */
     public void addItem(Object item) {
-        if (isPlaceholderVisible && comboBox.getItemCount() == 1 && comboBox.getItemAt(0).equals(placeholder)) {
-            comboBox.removeAllItems();
+        if (isPlaceholderVisible && comboBox.getItemCount() == 1) {
+            Object firstItem = comboBox.getItemAt(0);
+            if (firstItem != null && firstItem.equals(placeholder)) {
+                comboBox.removeAllItems();
+            }
         }
         comboBox.addItem(item);
     }
@@ -151,7 +154,7 @@ public class ComboBoxPersonalizadoObj extends JPanel {
      */
     public void eliminarTodosLosItems() {
         comboBox.removeAllItems();
-        comboBox.addItem(placeholder);
+        comboBox.addItem(null);
         comboBox.setSelectedIndex(0);
         comboBox.setForeground(placeholderColor);
         isPlaceholderVisible = true;
@@ -164,7 +167,8 @@ public class ComboBoxPersonalizadoObj extends JPanel {
     public void seleccionarItem(Object item) {
         ComboBoxModel<Object> model = comboBox.getModel();
         for (int i = 0; i < model.getSize(); i++) {
-            if (model.getElementAt(i).equals(item)) {
+            Object element = model.getElementAt(i);
+            if (element != null && element.equals(item)) {
                 comboBox.setSelectedItem(item);
                 comboBox.setForeground(textColor);
                 isPlaceholderVisible = false;

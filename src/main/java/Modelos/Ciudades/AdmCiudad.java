@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @author Sebas Masís
  */
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -50,7 +51,15 @@ public class AdmCiudad {
      * @param ciudad Ciudad destino de las conexiones a eliminar
      */
     public void eliminarConexionesHacia(Ciudad ciudad) {
-        // Por implementar
+        for (Ciudad city : ciudades) {
+            Iterator<Conexion> it = city.getConexiones().iterator();
+            while (it.hasNext()) {
+                Conexion conexion = it.next();
+                if (conexion.getCiudad() == ciudad) {
+                    it.remove();
+                }
+            }
+        }
     }
 
     /**
